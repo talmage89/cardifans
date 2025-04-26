@@ -1,7 +1,17 @@
 import { redirect } from "react-router";
 import { supabaseClient } from "./supabase";
 
-const ALLOWED_ADMIN_EMAILS: string[] = ["test@test.com"];
+const ALLOWED_ADMIN_EMAILS: string[] = [];
+
+if (process.env.ADMIN_EMAIL_1) {
+  ALLOWED_ADMIN_EMAILS.push(process.env.ADMIN_EMAIL_1);
+}
+if (process.env.ADMIN_EMAIL_2) {
+  ALLOWED_ADMIN_EMAILS.push(process.env.ADMIN_EMAIL_2);
+}
+if (process.env.ADMIN_EMAIL_3) {
+  ALLOWED_ADMIN_EMAILS.push(process.env.ADMIN_EMAIL_3);
+}
 
 export async function requireAuth(request: Request) {
   const cookieHeader = request.headers.get("Cookie");
