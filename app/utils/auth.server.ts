@@ -1,5 +1,8 @@
+import dotenv from "dotenv";
 import { redirect } from "react-router";
 import { supabaseClient } from "./supabase";
+
+dotenv.config();
 
 const ALLOWED_ADMIN_EMAILS: string[] = [];
 
@@ -110,9 +113,8 @@ export async function logIn(email: string, password: string) {
     throw new Error(error?.message || "An error occurred");
   }
 
-  // Check if the email is in the allowed admins list
   if (!ALLOWED_ADMIN_EMAILS.includes(email)) {
-    throw new Error("This account is not authorized to access admin features");
+    throw new Error("This account is not authorized to access admin features. Permitted emails: " + ALLOWED_ADMIN_EMAILS.join(", "));
   }
 
   const headers = new Headers();
