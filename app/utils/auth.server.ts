@@ -114,7 +114,7 @@ export async function logIn(email: string, password: string) {
   }
 
   if (!ALLOWED_ADMIN_EMAILS.includes(email)) {
-    throw new Error("This account is not authorized to access admin features. Permitted emails: " + ALLOWED_ADMIN_EMAILS.join(", "));
+    throw new Error("This account is not authorized to access admin features.");
   }
 
   const headers = new Headers();
